@@ -11,7 +11,7 @@ let bodyParser = require('body-parser');
 let cors = require('cors');
 
 /* Routes */
-let routesAccount = require('./routes/routesAccount.js');
+let routesAccount = require('./routes/account.route.js');
 
 /* CLI Arguments */
 let parseArgs = require('minimist')
