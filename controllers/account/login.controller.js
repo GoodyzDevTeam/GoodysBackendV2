@@ -5,7 +5,7 @@ const { getAccessToken } = require('../../auth/auth');
 
 exports.loginController = (req, res) => {
   try {
-    users.findOne({email: req.body.email}, function(err, data) {
+    users.findOne({email: req.body.email}, (err, data) => {
       if (err) {
         return res.status(500).send({ message: 'Internal server error'});
       } else if (data != undefined && data != null) {

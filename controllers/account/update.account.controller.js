@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 const users = require('../../models/users').usersModel;
-const jwt = require('jsonwebtoken');
+const { getAccessToken } = require('../../auth/auth');
 
 exports.updateAccountController = (req, res) => {
 
@@ -16,9 +16,7 @@ exports.updateAccountController = (req, res) => {
 					return res.status(401).send({ message: 'User not exists'});
 				}
 				users.findOne({_id: userId}, (err, doc) => {
-					const accessToken = jwt.sign({ userId: doc._id }, process.env.JWT_SECRET, {
-						expiresIn: process.env.JWT_EXPIRES_IN
-					});
+					const accessToken = getAccessToken(doc._id);
 	
 					return res.json({ status: 200, user: doc,  accessToken });
 				});

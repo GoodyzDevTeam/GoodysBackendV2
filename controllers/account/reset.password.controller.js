@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const users = require('../../models/users').usersModel;
-const jwt = require('jsonwebtoken');
+const { getAccessToken } = require('../../auth/auth');
 
 exports.resetPasswordController = (req, res) => {
 
@@ -17,9 +17,7 @@ exports.resetPasswordController = (req, res) => {
 				
 				users.findOne({email: req.body.email, password: req.body.newPassword}, (err, doc) => {
 					
-					const accessToken = jwt.sign({ userId: doc._id }, process.env.JWT_SECRET, {
-						expiresIn: process.env.JWT_EXPIRES_IN
-					});
+					const accessToken = getAccessToken(doc._id);
 					
 					return res.json({ status: 200, user: doc,  accessToken });
 				});
