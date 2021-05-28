@@ -16,8 +16,10 @@ app.use(compression());
 app.use(cors());
 
 /* Routes */
+const indexRoute = require('./routes/index');
 const routesAccount = require('./routes/account.route.js');
 
+app.use('/', indexRoute);
 app.use('/api/account', routesAccount);
 
 /* Database */
