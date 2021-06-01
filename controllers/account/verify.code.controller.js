@@ -11,7 +11,8 @@ exports.verifyCodeController = (req, res) => {
 	
 	try {
 		emailConfirm.findOne({type: 'reset-password', email: email, key: key}, (err, requested) => {
-			if (err) res.status(401).send({err: 'Check confirmation email'});
+			if (err) return res.status(401).send({err: 'Check confirmation email'});
+			if (!requested) return res.status(401).send({err: 'Check confirmation email'});
 			return res.status(200).send('OK');
 		});
 	} catch (error) {
