@@ -6,10 +6,12 @@ exports.auth = async (req, res, next) => {
     const Authorization  = req.rawHeaders[req.rawHeaders.indexOf('Authorization') + 1];
 
     if (!Authorization) {
-      return res.status(401).send({ message: 'Authorization token missing'});
+      return res.status(401).send({ err: 'Authorization token missing'});
     }
 
     const accessToken = Authorization.split(' ')[1];
+
+    if (!accessToken) return res.status(401).send({ err: 'Authorization missing'});
     const { userId } = jwt.verify(accessToken, process.env.JWT_SECRET);
     req.userId = userId;
     next();
