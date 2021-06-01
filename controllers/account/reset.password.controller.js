@@ -4,6 +4,14 @@ const emailConfirmModel = require('../../models/email.confirm').emailConfirmMode
 const { getAccessToken } = require('../../auth/auth');
 const nodemailer = require('nodemailer');
 
+const getRandomKey = () => {
+	let result = '';
+	for (let i = 0; i < 6; i++) {
+		result += (Math.floor(Math.random() * 10)).toString();
+	}
+	return result;
+}
+
 exports.resetPasswordController = (req, res) => {
 
 	console.log(req.body);
@@ -18,12 +26,15 @@ exports.resetPasswordController = (req, res) => {
 					return res.status(404).send({ message: 'User not found'});
 				}
 
-				await emailConfirmModel.deleteMany({type: 'reset-password', key: req.body.email});
+				await emailConfirmModel.deleteMany({type: 'reset-password', email: req.body.email});
+
+				const verificationCode = getRandomKey();
 
 				const emailConfirm = new emailConfirmModel({
 					_id: new mongoose.Types.ObjectId(),
 					type: 'reset-password',
-					key: req.body.email
+					email: req.body.email,
+					key: verificationCode
 				});
 
 				await emailConfirm.save();
@@ -37,13 +48,11 @@ exports.resetPasswordController = (req, res) => {
                     },
                 });
             
-				const confirmLink = `${process.env.BACK_END_BASE_URL}/api/account/confirm-email/?token=${token}`;
-				console.log(confirmLink);
                 const mailOptions = {
                     from: process.env.ADMIN_EMAIL,
                     to: req.body.email,
                     subject: process.env.CONFIRM_EMAIL_SUBJECT,
-                    text: `${process.env.CONFIRM_EMAIL_QUATE}: ${confirmLink}`,
+                    text: `${process.env.CONFIRM_EMAIL_QUOTE}: ${verificationCode}`,
                 };
             
                 const sendEmailPromise = new Promise((resolve, reject) => {

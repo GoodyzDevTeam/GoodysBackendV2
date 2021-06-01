@@ -9,13 +9,16 @@ exports.updatePasswordController = (req, res) => {
 
 	try {
 
-		const email = jwt.verify(req.body.token, process.env.JWT_SECRET).userId;
+		const email = req.body.email;
+		const key = req.body.key;
+		const password = req.body.password;
+		console.log(email, key, password);
 
-		emailConfirm.findOne({type: 'reset-password', key: email}, (err, requested) => {
+		emailConfirm.findOne({type: 'reset-password', email: email, key: key}, (err, requested) => {
 			if (err) return res.status(500).send({ err: error});
 			if (!requested) return res.status(404).send({ err: new Error('email not verified')});
 
-			users.updateOne({email: email, password: req.body.password}, async (err, data) => {
+			users.updateOne({email: email, password: password}, async (err, data) => {
 				console.log(data);
 				if (err) {
 					return res.status(500).send({ message: 'Internal server error'});
@@ -24,7 +27,7 @@ exports.updatePasswordController = (req, res) => {
 						return res.status(404).send({ message: 'User not found'});
 					}
 					
-					await emailConfirm.deleteOne({type: 'reset-password', key: email});
+					await emailConfirm.deleteOne({type: 'reset-password', email: email});
 					
 					return res.json({ status: 200, message: 'email sent' });
 				} else {
