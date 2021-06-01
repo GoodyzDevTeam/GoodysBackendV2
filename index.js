@@ -5,6 +5,7 @@ const compression = require('compression');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const logger = require("morgan");
 const cors = require('cors');
 const helmet = require("helmet");
 const path = require("path");
