@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const users = require('../../models/users').usersModel;
-const emailConfirm = require('../../models/email.confirm').emailConfirmModel;
+const users = require('../../models/users/users').usersModel;
+const emailConfirm = require('../../models/users/email.confirm').emailConfirmModel;
 const { getAccessToken } = require('../../auth/auth');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');

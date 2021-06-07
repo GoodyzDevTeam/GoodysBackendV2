@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose');
-const users = require('../../models/users').usersModel;
+const users = require('../../models/users/users').usersModel;
 
 exports.getAccountController = (req, res) => {
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const users = require('../../models/users').usersModel;
+const users = require('../../models/users/users').usersModel;
 const { getAccessToken } = require('../../auth/auth');
-const emailConfirm = require('../../models/email.confirm').emailConfirmModel;
+const emailConfirm = require('../../models/users/email.confirm').emailConfirmModel;
 
 exports.verifyCodeController = (req, res) => {
 	

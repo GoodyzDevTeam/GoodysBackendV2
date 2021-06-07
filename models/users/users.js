@@ -1,8 +1,8 @@
-let mongoose = require('mongoose');
-let mongoosePaginate = require('mongoose-paginate');
-let Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
+const Schema = mongoose.Schema;
 
-let users = {
+const users = {
     displayName: {
         type: String
     },
@@ -46,7 +46,7 @@ let users = {
     }
 }
 
-let usersSchema = new Schema(users);
+const usersSchema = new Schema(users);
 
 usersSchema.pre('save', next => {
     let ts = Math.round((new Date()).getTime() / 1000);
