@@ -6,7 +6,9 @@ const { getAccessToken } = require('../../auth/auth');
 exports.registerController = (req, res, next) => {
 	try {
 		let saveUser = () => {
-			user = new users;
+			const user = new users({
+				_id: new mongoose.Types.ObjectId()
+			});
 			user.displayName = req.body.firstName + ' ' + req.body.lastName;
 			user.email = req.body.email;
 			user.password = req.body.password;

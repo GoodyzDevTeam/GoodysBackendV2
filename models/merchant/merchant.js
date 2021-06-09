@@ -54,5 +54,5 @@ merchantSchema.plugin(mongoosePaginate);
 
 module.exports = {
     merchant,
-    merchantModel: mongoose.model('merchant', merchantSchema)
+    merchantModel: mongoose.model('merchants', merchantSchema)
 }
