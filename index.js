@@ -32,6 +32,7 @@ const routesBrand = require('./routes/brand.route');
 const routesDeal = require('./routes/deal.route');
 const routesDelivery = require('./routes/delivery.route');
 const routesMerchant = require('./routes/merchant.route');
+const routesMenu = require('./routes/menu.route');
 
 app.use('/', indexRoute);
 app.use('/api/account', routesAccount);
@@ -41,6 +42,7 @@ app.use('/api/brand', routesBrand);
 app.use('/api/deal', routesDeal);
 app.use('/api/delivery', routesDelivery);
 app.use('/api/merchant', routesMerchant);
+app.use('/api/menu', routesMenu);
 
 /* Database */
 const connectDB = require('./application/utils/connect.db');

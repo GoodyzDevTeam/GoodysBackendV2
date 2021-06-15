@@ -26,6 +26,9 @@ const merchant = {
     category: [{
         type: mongoose.Types.ObjectId
     }],
+    menu: {
+        type: Object
+    },
     product: [{
         type: mongoose.Types.ObjectId
     }],
