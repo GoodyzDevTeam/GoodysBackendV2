@@ -3,14 +3,23 @@ const mongoosePaginate = require('mongoose-paginate');
 const Schema = mongoose.Schema;
 
 const product = {
-    name: {
+    productName: {
         type: String,
         required: true
     },
-    price: {
-        type: Number
+    weightAndPrice: [{
+        type: Object
+    }],
+    strain: {
+        type: String
     },
-    weight: {
+    type: {
+        type: String
+    },
+    brand: {
+        type: String
+    },
+    thcLevel: {
         type: String
     },
     quantity: {
@@ -28,10 +37,16 @@ const product = {
     mainImage: {
         type: String
     },
-    images: [{
+    photos: [{
         type: String
     }],
     description: {
+        type: String
+    },
+    featuredProduct: {
+        type: String
+    },
+    mid: {
         type: String
     }
 };
