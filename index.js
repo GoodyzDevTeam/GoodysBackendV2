@@ -34,6 +34,7 @@ const routesDelivery = require('./routes/delivery.route');
 const routesMerchant = require('./routes/merchant.route');
 const routesMenu = require('./routes/menu.route');
 const routesOrders = require('./routes/orders.route');
+const routesReview = require('./routes/review.route');
 
 app.use('/', indexRoute);
 app.use('/api/account', routesAccount);
@@ -45,6 +46,7 @@ app.use('/api/delivery', routesDelivery);
 app.use('/api/merchant', routesMerchant);
 app.use('/api/menu', routesMenu);
 app.use('/api/orders', routesOrders);
+app.use('/api/review', routesReview);
 
 /* Database */
 const connectDB = require('./application/utils/connect.db');

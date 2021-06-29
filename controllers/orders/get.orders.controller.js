@@ -8,6 +8,7 @@ exports.getOrdersController = async (req, res) => {
 		const results = await ordersModel.find({ merchantId: userId})
 			.populate({ path: 'customer', model: 'users' })
 			.populate({ path: 'products.product', model: 'products' });
+		console.log(results);
     return res.status(200).send({ orders: results });
   } catch (error) {
     console.error(error);
