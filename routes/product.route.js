@@ -3,7 +3,8 @@ const router = express.Router();
 
 const { auth } = require('../auth/auth');
 const { getAllProductsController } = require('../controllers/product/get.all.product.controller');
-const { getLikeProductsController } = require('../controllers/product/get.like.product.controller');
+const { getFavoriteProductsController } = require('../controllers/product/get.favorite.product.controller');
+const { toggleFavoriteProductsController } = require('../controllers/product/toggle.favorite.product.controller');
 const { getAllCategoriesController } = require('../controllers/product/get.all.category.controller');
 const { getTopProductsController } = require('../controllers/product/get.top.product.controller');
 const { getFeaturedProductsController } = require('../controllers/product/get.featured.product.controller');
@@ -16,7 +17,8 @@ router.get('/by-id/:productId', auth, getProductByIdController);
 router.get('/category/all', auth, getAllCategoriesController);
 router.get('/category/:categoryId', auth, getCategoryController);
 router.get('/by-category/:categoryId', auth, getProductsByCategoryController);
-router.get('/like-products', auth, getLikeProductsController);
+router.get('/favorite-products', auth, getFavoriteProductsController);
+router.post('/favorite-products', auth, toggleFavoriteProductsController);
 router.get('/top-products', auth, getTopProductsController);
 router.get('/featured-products', auth, getFeaturedProductsController);
 

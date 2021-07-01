@@ -3,10 +3,10 @@ const mongoosePaginate = require('mongoose-paginate');
 const Schema = mongoose.Schema;
 
 const favoriteProduct = {
-    userId: {
+    user: {
         type: mongoose.Types.ObjectId
     },
-    productId: {
+    product: {
         type: mongoose.Types.ObjectId
     }
 };
@@ -25,5 +25,5 @@ favoriteProductSchema.plugin(mongoosePaginate);
 
 module.exports = {
     favoriteProduct,
-    favoriteProductModel: mongoose.model('favoriteProduct', favoriteProductSchema)
+    favoriteProductModel: mongoose.model('favoriteProducts', favoriteProductSchema)
 }
