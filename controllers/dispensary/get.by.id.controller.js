@@ -1,11 +1,11 @@
-
 const mongoose = require('mongoose');
 const dispensary = require('../../models/dispensary/dispensary').dispensaryModel;
 
-exports.getAllDispensariesController = async (req, res) => {
+exports.getByIdController = async (req, res) => {
 
   try {
-    const results = await dispensary.find({}).populate({ path: 'products', model: 'products' });
+    const results = await dispensary.findOne({ _id: req.params.dispensaryId })
+      .populate({ path: 'products', model: 'products' });
     return res.status(200).send(results);
   } catch (error) {
     console.error(error);
