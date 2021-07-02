@@ -4,7 +4,7 @@ const favoriteDispensary = require('../../models/dispensary/favorite.dispensary'
 exports.getFavoriteDispensariesController = async (req, res) => {
 
   try {
-    const results = await favoriteDispensary.find({});
+    const results = await favoriteDispensary.find({}).populate({ path: 'dispensary', model: 'dispensaries' });
     return res.status(200).send(results);
   } catch (error) {
     console.error(error);
