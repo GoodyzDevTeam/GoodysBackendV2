@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const favoriteDispensary = require('../../models/dispensary/dispensary').favoriteDispensaryModel;
+const favoriteDispensary = require('../../models/dispensary/favorite.dispensary').favoriteDispensaryModel;
 
 exports.getFavoriteDispensariesController = async (req, res) => {
 
