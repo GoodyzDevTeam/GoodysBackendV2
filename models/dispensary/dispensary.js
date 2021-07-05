@@ -51,7 +51,15 @@ const dispensary = {
 	}],
 	products: [{
 		type: Schema.Types.ObjectId
-	}]
+	}],
+	location: {
+		lat: {
+			type: Number
+		},
+		lng: {
+			type: Number
+		}
+	}
 };
 
 const dispensarySchema = new Schema(dispensary);
