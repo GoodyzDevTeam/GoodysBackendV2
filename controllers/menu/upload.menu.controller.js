@@ -9,21 +9,19 @@ exports.uploadMenuController = async (req, res) => {
     console.log(curMerchant);
     const preProducts = curMerchant.menu ? curMerchant.menu.products : [];
 
-    for (let product of preProducts) {
-      await productModel.deleteOne({ mid: product.mid });
-    }
-    
-    await merchantModel.updateOne({_id: userId}, { menu: req.body.menu });
-
-    for ( let product of req.body.menu.products) {
+    for (let product of req.body.menu.products) {
+      let succeeded = await productModel.updateOne({ mid: product.mid }, {...product});
+      console.log("hey", succeeded);
+      if (succeeded.n) continue;
       let newProductSchema = JSON.parse(JSON.stringify(product));
-      console.log(newProductSchema);
       let newProduct = new productModel({
         _id: new mongoose.Types.ObjectId(),
         ...newProductSchema
       });
       await newProduct.save();
     }
+    
+    await merchantModel.updateOne({_id: userId}, { menu: req.body.menu });
 
     return res.status(200).send('OK');
   } catch (error) {

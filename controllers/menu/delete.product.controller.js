@@ -16,7 +16,7 @@ exports.deleteProductController = async (req, res) => {
 		preProducts = preProducts ? preProducts.filter(product => product.mid != mid) : [];
 
 		const deletingProduct = await productModel.findOne({ mid: mid});
-		await deleteProductPhoto(deletingProduct.photos);
+		if (deletingProduct) await deleteProductPhoto(deletingProduct.photos);
 
 		await productModel.deleteOne({ mid: mid});
 
