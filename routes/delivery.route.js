@@ -4,6 +4,6 @@ const router = express.Router();
 const { auth } = require('../auth/auth');
 const { getAllDeliveriesController } = require('../controllers/delivery/get.all.delivery.controller');
 
-router.get('/', auth, getAllDeliveriesController);
+router.get('/', getAllDeliveriesController);
 
 module.exports = router;

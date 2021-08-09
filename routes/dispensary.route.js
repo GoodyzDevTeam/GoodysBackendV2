@@ -7,9 +7,9 @@ const { getFavoriteDispensariesController } = require('../controllers/dispensary
 const { toggleFavoriteDispensariesController } = require('../controllers/dispensary/toggle.favorite.dispensary.controller');
 const { getByIdController } = require('../controllers/dispensary/get.by.id.controller');
 
-router.get('/all', auth, getAllDispensariesController);
+router.get('/all', getAllDispensariesController);
 router.get('/favorite-dispensaries', auth, getFavoriteDispensariesController);
 router.post('/favorite-dispensaries', auth, toggleFavoriteDispensariesController);
-router.get('/by-id/:dispensaryId', auth, getByIdController);
+router.get('/by-id/:dispensaryId', getByIdController);
 
 module.exports = router;
