@@ -6,7 +6,27 @@ const orders = {
 	merchantId: {
 		type: Schema.Types.ObjectId
 	},
-	customer: {
+	customerId: {
+		type: Schema.Types.ObjectId
+	},
+	anonymous: {
+		address: {
+			type: Schema.Types.String,
+		},
+		email: {
+			type: Schema.Types.String,
+		},
+		firstName: {
+			type: Schema.Types.String,
+		},
+		lastName: {
+			type: Schema.Types.String,
+		},
+		phone: {
+			type: Schema.Types.String,
+		}
+	},
+	dispensary: {
 		type: Schema.Types.ObjectId
 	},
 	products: [{
@@ -31,7 +51,10 @@ const orders = {
 	},
 	status: {
 		type: String
-	}
+	},
+	license: [{
+		type: Schema.Types.String,
+	}]
 };
 
 const ordersSchema = new Schema(orders);
