@@ -3,11 +3,20 @@ const ordersModel = require('../../models/orders/orders').ordersModel;
 
 exports.getOrdersController = async (req, res) => {
 	const userId = req.userId;
-	
+	console.log(userId);
   try {
-		const results = await ordersModel.find({ merchantId: userId})
-			.populate({ path: 'customer', model: 'users' })
-			.populate({ path: 'products.product', model: 'products' });
+		// const results = await ordersModel.find({ merchant: userId})
+		// 	.populate({ path: 'customer', model: 'users' })
+		// 	.populate({ path: 'products.product', model: 'products' });
+		let results = [];
+		const orders = await ordersModel.find({}).populate({ path: 'products.productId', model: 'products' });
+		// const orders = await ordersModel.find({});
+		for (let order of orders) {
+			console.log(JSON.stringify(order));
+			if (order.products[0].productId.merchant == userId) {
+				results.push(order);
+			}
+		}
 		console.log(results);
     return res.status(200).send({ orders: results });
   } catch (error) {

@@ -43,6 +43,9 @@ const users = {
     },
     isPublic: {
         type: Boolean
+    },
+    stripeAccountId: {
+        type: String
     }
 }
 

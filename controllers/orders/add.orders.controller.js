@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const ordersModel = require('../../models/orders/orders').ordersModel;
 const { addLicensePhoto } = require('../../application/photo/add.license.photo');
+const jwt = require('jsonwebtoken');
+const dotenv = require("dotenv");
+const myEnv = dotenv.config();
 
 exports.addOrdersController = async (req, res) => {
 	const merchantId = req.body.merchantId;
@@ -10,15 +13,12 @@ exports.addOrdersController = async (req, res) => {
 	const requestedTime = req.body.requestedTime;
     const orderType = req.body.orderType;
     const quantity = JSON.parse(req.body.quantity);
-    const status = 'inprogress';
+    const status = 'requested';
     const license = await addLicensePhoto(req.files);
-
-    console.log(req.body, req.files, req.file);
     
     let products = [];
     let i = 0;
     for (let product of JSON.parse(req.body.products)) {
-        console.log(product, customerId);
         let wpq = [];
         let j = 0;
         let subTotal = 0;
@@ -40,7 +40,7 @@ exports.addOrdersController = async (req, res) => {
         i++;
     }
 
-    const newOrder = {
+    let newOrder = {
 		_id: new mongoose.Types.ObjectId(),
 		requestedTime: requestedTime,
 		status: status,
@@ -56,6 +56,15 @@ exports.addOrdersController = async (req, res) => {
 
     if ( customerId != undefined && customerId != 'undefined' )
         newOrder.customerId = customerId;
+
+    if (anonymous.accessToken !== '') {
+        try {
+            const { userId } = jwt.verify(anonymous.accessToken.split(' ')[1], process.env.JWT_SECRET);
+            newOrder.customerId = new mongoose.Types.ObjectId(userId);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     let newOrderSchema = new ordersModel(newOrder);
     console.log(newOrder);

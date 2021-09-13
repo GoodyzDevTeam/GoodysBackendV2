@@ -30,7 +30,7 @@ const orders = {
 		type: Schema.Types.ObjectId
 	},
 	products: [{
-		product: {
+		productId: {
 			type: Schema.Types.ObjectId
 		},
 		wpq: {
@@ -40,6 +40,9 @@ const orders = {
 			type: Schema.Types.Number
 		}
 	}],
+	discounted: {
+		type: Schema.Types.Number
+	},
 	requestedTime: {
 		type: Date
 	},
